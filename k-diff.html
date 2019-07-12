@@ -1,0 +1,88 @@
+<script>
+
+// Given an array of integers and an integer k, you need to find the number of unique k-diff pairs in the array. Here a k-diff pair is defined as an integer pair (i, j), where i and j are both numbers in the array and their absolute difference is k.
+
+function find(nums,k) {
+	var count = 0;
+	var repeatArr = [];
+	if (k!==0) {
+		for(var m = 0; m < nums.length; m++) {
+			if(repeatArr.indexOf(nums[m]) == -1) {
+				repeatArr.push(nums[m]);
+			}
+		}
+		for (var i = 0; i < repeatArr.length; i++){
+			for (j = i+1; j < repeatArr.length; j++) {
+				if(Math.abs(repeatArr[i]-repeatArr[j]) == k) {
+					count++;
+				}
+			}
+		}
+	}
+	if (k==0) {
+		var items = [];
+        for (var i = 0; i < nums.length; i++) {
+        	// 去掉重复的数对值
+            if (items.includes(nums[i])) {
+                continue;
+            }
+            // 从当前值往后找
+            var index = nums.indexOf(nums[i], i+1);
+            // 如果后面没有相同的值则从当前值往前找
+            if (i !== 0 && index === -1){ 
+                index = nums.lastIndexOf(nums[i], i-1);
+            }
+            // 存在该数对就push
+            if (index !== -1) {
+                items.push(nums[i]);
+                items.push(nums[index]);
+                count++;
+            }
+        }
+	}
+	if (k<0) {
+		return 0;
+	}
+    console.log(count);
+	return count;
+}
+
+find([1,0,1,2,1,1,2],0);
+
+// var findPairs = function(nums, k) {
+//     let result = 0;
+//     if (k < 0) return 0;
+//     if (k===0) {
+//         let ignoreItems = [];
+//         for (let i = 0; i < nums.length; i++) {
+//             if (ignoreItems.includes(nums[i]))
+//                 continue;
+//             let index = nums.indexOf(nums[i], i+1);
+//             if (i !== 0 && index === -1)
+//                 index = nums.lastIndexOf(nums[i], i-1);
+//             if (index !== -1) {
+//                 result ++;
+//                 ignoreItems.push(nums[i]);
+//                 ignoreItems.push(nums[index]);
+//             }
+//         }
+
+//     } else {
+//         let set = new Set(nums);
+//         for (let n of set) {
+//             if (set.has(n+k)) result ++;
+//         }
+//     }
+//     return result;
+// };
+
+
+
+// 考虑问题不周全
+// indexOf的第一个参数是查找的值，第二个参数是查找的起始位置，输出为查找值所在的索引。
+// 第一个参数是查找的值，第二个参数规定最后检索的位置,输出距离检索末尾最近的查找值的索引此索引从左往右计算
+// 找两个数相同 var index = nums.indexOf(nums[i], i+1); nums[index]
+// for循环中if中的continue意思是下面的代码不执行，继续下一个index
+
+</script>
+
