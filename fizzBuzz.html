@@ -1,0 +1,21 @@
+<script>
+// 输出返回1-n的数字，如果是3的倍数代替输出Fizz,如果是5的倍数输出Buzz,如果是3倍又是5倍则输出FizzBuzz
+var fizzBuzz = function(n) {
+	var arr = [];
+	// debugger;
+    for(var i = 0; i < n; i++) {
+    	arr.push((i+1).toString());
+    	if((arr[i]%3==0) && (arr[i]%5==0)) {
+    		arr[i]="FizzBuzz";
+    	}
+    	if(arr[i]%3==0) {
+    		arr[i]="Fizz";
+    	}
+    	if(arr[i]%5==0) {
+    		arr[i]="Buzz";
+    	}
+    }
+    return arr;
+};
+fizzBuzz(15);
+</script>
