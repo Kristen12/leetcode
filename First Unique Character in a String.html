@@ -1,0 +1,22 @@
+<script>
+var firstUniqChar = function(s) {
+    var arr = [];
+    for(var i = 0; i < s.length; i++) {
+        var index = s.indexOf(s[i], i+1);
+        if (i !== 0 && index === -1){ 
+            index = s.lastIndexOf(s[i], i-1);
+        }
+        if(index == -1){
+            arr.push(i);
+        }
+    }
+    if(arr.length!==0) {
+        return arr[0];
+    }
+    else {
+        return -1
+    }
+};
+
+firstUniqChar('leetcodeleetcode');
+</script>
